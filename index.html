@@ -298,12 +298,20 @@
   }
 
   function searchBooks() {
-    const input = document.getElementById('searchInput').value.toLowerCase();
-    const filtered = currentBooks.filter(book =>
-      book.title.toLowerCase().includes(input)
-    );
-    displayBooks(filtered);
+  if (currentBooks.length === 0) {
+    alert("⚠️ Please select a category first!");
+    return;
   }
+  const input = document.getElementById('searchInput').value.toLowerCase();
+  const allBooks = Object.values(bookData).flat(); // merge all categories
+  const filtered = allBooks.filter(book =>
+    book.title.toLowerCase().includes(input)
+  );
+  document.getElementById("categoryTitle").innerText = `Search Results`;
+  displayBooks(filtered);
+}
+
+
 function loginUser() {
   const name = document.getElementById('loginName').value.trim();
   const email = document.getElementById('loginEmail').value.trim();
